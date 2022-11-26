@@ -484,7 +484,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 370738280}
   segmentCount: 50
   segmentLength: 0.1
-  ropeWidth: 0.1
+  ropeWidth: 0.05
+  velocityScale: 2
   gravity: {x: 0, y: 98, z: 0}
   startTransform: {fileID: 368141246}
 --- !u!4 &370738282

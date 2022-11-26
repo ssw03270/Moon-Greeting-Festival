@@ -9,6 +9,7 @@ public class Kite : MonoBehaviour
     public int segmentCount;
     public float segmentLength = 0.1f;
     public float ropeWidth = 0.1f;
+    public float velocityScale = 1f;
     public Vector3 gravity = new Vector3(0, 9.8f, 0);
 
     [Space(10f)]
@@ -35,7 +36,7 @@ public class Kite : MonoBehaviour
         for(int i = 0; i < segments.Count; i++)
         {
             segments[i].currentVel = segments[i].currentPos - segments[i].previousPos;
-            segments[i].currentVel /= 2f;
+            segments[i].currentVel /= velocityScale;
             segments[i].previousPos = segments[i].currentPos;
             segments[i].currentPos += gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
             segments[i].currentPos += segments[i].currentVel;
@@ -91,8 +92,9 @@ public class Kite : MonoBehaviour
                 KiteObject.transform.position = segments[i + 1].currentPos;
                 if(segments[i + 1].currentVel != Vector3.zero)
                 {
-                    KiteObject.transform.rotation = Quaternion.LookRotation(segments[i + 1].currentPos - segments[i + 1].previousPos);
-                    KiteObject.transform.rotation *= Quaternion.Euler(new Vector3(0, 90, 0));
+                    KiteObject.transform.rotation = Quaternion.Slerp(KiteObject.transform.rotation, 
+                        Quaternion.LookRotation(segments[i + 1].currentPos - segments[i + 1].previousPos)
+                        * Quaternion.Euler(new Vector3(0, 90, 0)), Time.fixedDeltaTime);
                 }
             }
         }
