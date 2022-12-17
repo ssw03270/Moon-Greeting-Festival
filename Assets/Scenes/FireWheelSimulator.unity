@@ -865,6 +865,7 @@ GameObject:
   - component: {fileID: 1263525608}
   - component: {fileID: 1263525607}
   - component: {fileID: 1263525609}
+  - component: {fileID: 1263525610}
   m_Layer: 0
   m_Name: FireWheel_AudioPlayer
   m_TagString: Untagged
@@ -910,7 +911,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 97aaac70b218d43499871d68a32c7b49, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -996,6 +997,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1263525610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263525606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaaacbc400f29f4e9b6495cb5e08446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 8300000, guid: 97aaac70b218d43499871d68a32c7b49, type: 3}
 --- !u!1 &1501553795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1170,7 @@ PrefabInstance:
     - target: {fileID: 2683195716791022644, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2683195716791022646, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}

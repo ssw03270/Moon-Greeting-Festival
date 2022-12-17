@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioPlayer : MonoBehaviour
+public class Cudgel : MonoBehaviour
 {
     public AudioClip audio;
     private AudioSource audioSource;
-    private bool firstPlay = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +24,12 @@ public class AudioPlayer : MonoBehaviour
         if (audio != null)
         {
             audioSource.clip = audio;
-            
-            if(other.tag == "Player" && firstPlay)
+
+            if (other.tag == "Cudgel")
             {
                 audioSource.Stop();
                 audioSource.time = 0;
                 audioSource.Play();
-                firstPlay = false;
             }
         }
     }
