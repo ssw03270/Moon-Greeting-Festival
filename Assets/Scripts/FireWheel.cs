@@ -1,12 +1,9 @@
-using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kite : MonoBehaviour
+public class FireWheel : MonoBehaviour
 {
-    public AudioClip audio;
-    public Grabbable grabbable;
     public GameObject KiteObject;
     public LineRenderer lineRenderer;
     public int segmentCount;
@@ -14,13 +11,11 @@ public class Kite : MonoBehaviour
     public float ropeWidth = 0.1f;
     public float velocityScale = 1f;
     public Vector3 gravity = new Vector3(0, 9.8f, 0);
-    public bool isRaceFinished = false;
 
     [Space(10f)]
     public Transform startTransform;
     private List<Segment> segments = new List<Segment>();
     private bool isFirst = true;
-    public AudioSource audioSource;
 
     private void Reset()
     {
@@ -30,17 +25,16 @@ public class Kite : MonoBehaviour
     void Awake()
     {
         Vector3 segmentPos = startTransform.position;
-        for(int i = 0; i < segmentCount; i++)
+        for (int i = 0; i < segmentCount; i++)
         {
             segments.Add(new Segment(segmentPos));
             segmentPos.y += segmentLength;
         }
-        audioSource = GetComponent<AudioSource>();
     }
 
     void UpdateSegments()
     {
-        for(int i = 0; i < segments.Count; i++)
+        for (int i = 0; i < segments.Count; i++)
         {
             segments[i].currentVel = segments[i].currentPos - segments[i].previousPos;
             segments[i].currentVel /= velocityScale;
@@ -58,26 +52,6 @@ public class Kite : MonoBehaviour
             ApplyConstraint();
         }
         DrawRope();
-
-        if(grabbable != null)
-        {
-            if (grabbable.handPoseType == HandPoseType.AnimatorID && isFirst)
-            {
-                if (audio != null)
-                {
-                    audioSource.clip = audio;
-                    audioSource.Stop();
-                    audioSource.time = 0;
-                    audioSource.Play();
-                }
-                isFirst = false;    
-            }
-        }
-        
-        if (!audioSource.isPlaying && !isFirst && !isRaceFinished)
-        {
-            isRaceFinished = true;
-        }
     }
 
     private void DrawRope()
@@ -97,7 +71,7 @@ public class Kite : MonoBehaviour
     private void ApplyConstraint()
     {
         segments[0].currentPos = startTransform.position;
-        for(int i = 0; i < segments.Count - 1; i++)
+        for (int i = 0; i < segments.Count - 1; i++)
         {
             float distance = (segments[i].currentPos - segments[i + 1].currentPos).magnitude;
             float difference = segmentLength - distance;
@@ -105,7 +79,7 @@ public class Kite : MonoBehaviour
 
             Vector3 movement = direction * difference;
 
-            if(i == 0)
+            if (i == 0)
             {
                 segments[i + 1].currentPos += movement;
             }
@@ -114,12 +88,12 @@ public class Kite : MonoBehaviour
                 segments[i].currentPos -= movement * 0.5f;
                 segments[i + 1].currentPos += movement * 0.5f;
             }
-            if(i == segments.Count - 2)
+            if (i == segments.Count - 2)
             {
                 KiteObject.transform.position = segments[i + 1].currentPos;
-                if(segments[i + 1].currentVel != Vector3.zero)
+                if (segments[i + 1].currentVel != Vector3.zero)
                 {
-                    KiteObject.transform.rotation = Quaternion.Slerp(KiteObject.transform.rotation, 
+                    KiteObject.transform.rotation = Quaternion.Slerp(KiteObject.transform.rotation,
                         Quaternion.LookRotation(segments[i + 1].currentPos - segments[i + 1].previousPos)
                         * Quaternion.Euler(new Vector3(0, 90, 0)), Time.fixedDeltaTime);
                 }
