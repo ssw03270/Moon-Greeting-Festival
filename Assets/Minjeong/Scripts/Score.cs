@@ -75,10 +75,6 @@ public class Score : MonoBehaviour
     }
     
     
-    IEnumerator UI20Show()
-    {
-        yield return new WaitForSeconds(1f);
-        _ScoreText.text = "20";
-    }
+   
 
 }
