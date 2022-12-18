@@ -61,7 +61,7 @@ public class Kite : MonoBehaviour
 
         if(grabbable != null)
         {
-            if (grabbable.handPoseType == HandPoseType.AnimatorID && isFirst)
+            if (grabbable.BeingHeld && isFirst)
             {
                 if (audio != null)
                 {

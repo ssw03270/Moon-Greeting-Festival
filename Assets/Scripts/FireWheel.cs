@@ -1,11 +1,17 @@
+using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FireWheel : MonoBehaviour
 {
-    public GameObject KiteObject;
+    public GameObject FireWheelObject;
+    public Grabbable grabbable;
     public LineRenderer lineRenderer;
+
+    public Material night;
+    public Material day;
+
     public int segmentCount;
     public float segmentLength = 0.1f;
     public float ropeWidth = 0.1f;
@@ -52,6 +58,18 @@ public class FireWheel : MonoBehaviour
             ApplyConstraint();
         }
         DrawRope();
+
+        if (grabbable != null)
+        {
+            if (grabbable.BeingHeld)
+            {
+                RenderSettings.skybox = night;
+            }
+            else
+            {
+                RenderSettings.skybox = day;
+            }
+        }
     }
 
     private void DrawRope()
@@ -90,10 +108,10 @@ public class FireWheel : MonoBehaviour
             }
             if (i == segments.Count - 2)
             {
-                KiteObject.transform.position = segments[i + 1].currentPos;
+                FireWheelObject.transform.position = segments[i + 1].currentPos;
                 if (segments[i + 1].currentVel != Vector3.zero)
                 {
-                    KiteObject.transform.rotation = Quaternion.Slerp(KiteObject.transform.rotation,
+                    FireWheelObject.transform.rotation = Quaternion.Slerp(FireWheelObject.transform.rotation,
                         Quaternion.LookRotation(segments[i + 1].currentPos - segments[i + 1].previousPos)
                         * Quaternion.Euler(new Vector3(0, 90, 0)), Time.fixedDeltaTime);
                 }
