@@ -8,6 +8,12 @@ TagManager:
   - Cake
   - Pie
   - Cudgel
+  - Arrow1
+  - Arrow2
+  - Arrow3
+  - Arrow4
+  - Arrow5
+  - Stamp
   layers:
   - Default
   - TransparentFX

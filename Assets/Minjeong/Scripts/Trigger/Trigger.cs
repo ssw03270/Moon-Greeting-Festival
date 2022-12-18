@@ -10,18 +10,28 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Renderer render = GetComponent<Renderer>();
+        if (other.tag == "Player")
+        {
+            Renderer render = GetComponent<Renderer>();
 
-        m_oldColor = render.material.color;
-        render.material.color = Color.green;
-        isTrigger = true;
+            m_oldColor = render.material.color;
+            render.material.color = Color.green;
+            isTrigger = true;    
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Renderer render = GetComponent<Renderer>();
-        render.material.color = m_oldColor;
-        isTrigger = false;
+        if (other.tag == "Player")
+        {
+            Renderer render = GetComponent<Renderer>();
+            render.material.color = m_oldColor;
+            isTrigger = false;
+        }
+        
+
+    
     }
 
 }

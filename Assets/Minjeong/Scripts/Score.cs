@@ -16,7 +16,8 @@ public class Score : MonoBehaviour
 
     public Bow bow;
 
-    private Text _ScoreText;
+    public string _ScoreText;
+
     private Score20 _Score20;
     private Score40 _score40;
     private Score60 _score60;
@@ -24,7 +25,15 @@ public class Score : MonoBehaviour
     private Score100 _score100;
 
     public static int bowScoreType = 0;
-    
+    private int count = 0;
+
+
+    private bool count1;
+    private bool count2;
+    private bool count3;
+    private bool count4;
+    private bool count5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +43,9 @@ public class Score : MonoBehaviour
         _score80 = Score8.GetComponent<Score80>();
         _score100 = Score10.GetComponent<Score100>();
 
-        _ScoreText = ScoreUI.transform.Find("ScoreText").GetComponent<Text>();
+        //_ScoreText = ScoreUI.transform.Find("ScoreText").GetComponent<Text>();
 
+        
     }
     
 
@@ -46,32 +56,36 @@ public class Score : MonoBehaviour
         {
             bowScoreType = 0;
         }
+        
         if (bowScoreType == 20)
         {
-            _ScoreText.text = "20";
-            
+            _ScoreText = "20";
         }
         else if (bowScoreType == 40)
         {
-            _ScoreText.text = "40";
+            _ScoreText = "40";
         }
         else if (bowScoreType == 60)
         {
-            _ScoreText.text = "60";
+            _ScoreText = "60";
+
         }
         else if (bowScoreType == 80)
         {
-            _ScoreText.text = "80";
+            _ScoreText = "80";
+
         }
         else if (bowScoreType == 100)
         {
-            _ScoreText.text = "100";
+            _ScoreText = "100";
+
         }
         else
         {
-            _ScoreText.text = "";
+            _ScoreText = "0";   
         }
 
+        Debug.Log(_ScoreText + "score text");
     }
     
     

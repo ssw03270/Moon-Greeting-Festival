@@ -83,6 +83,9 @@ namespace BNG {
         List<DrawDefinition> drawDefs;
 
         AudioSource audioSource;
+        
+        // bow count
+        public int count;
 
         void Start() {
             initialKnockPosition = ArrowKnock.localPosition;
@@ -397,7 +400,10 @@ namespace BNG {
 
             // Make sure hands are showing if we hid them
             arrowGrabber.ResetHandGraphics();
-
+            
+            // Bow 횟수 Count 증가
+            count += 1;
+            
             resetArrowValues();
         }
 
