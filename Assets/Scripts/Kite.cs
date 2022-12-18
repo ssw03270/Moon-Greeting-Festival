@@ -1,9 +1,12 @@
+using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Kite : MonoBehaviour
 {
+    public AudioClip audio;
+    public Grabbable grabbable;
     public GameObject KiteObject;
     public LineRenderer lineRenderer;
     public int segmentCount;
@@ -11,10 +14,13 @@ public class Kite : MonoBehaviour
     public float ropeWidth = 0.1f;
     public float velocityScale = 1f;
     public Vector3 gravity = new Vector3(0, 9.8f, 0);
+    public bool isRaceFinished = false;
 
     [Space(10f)]
     public Transform startTransform;
     private List<Segment> segments = new List<Segment>();
+    private bool isFirst = true;
+    public AudioSource audioSource;
 
     private void Reset()
     {
@@ -29,6 +35,7 @@ public class Kite : MonoBehaviour
             segments.Add(new Segment(segmentPos));
             segmentPos.y += segmentLength;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     void UpdateSegments()
@@ -46,11 +53,31 @@ public class Kite : MonoBehaviour
     void FixedUpdate()
     {
         UpdateSegments();
-        for(int i = 0; i < segmentCount; i++)
+        for (int i = 0; i < segmentCount; i++)
         {
             ApplyConstraint();
         }
         DrawRope();
+
+        if(grabbable != null)
+        {
+            if (grabbable.BeingHeld && isFirst)
+            {
+                if (audio != null)
+                {
+                    audioSource.clip = audio;
+                    audioSource.Stop();
+                    audioSource.time = 0;
+                    audioSource.Play();
+                }
+                isFirst = false;    
+            }
+        }
+        
+        if (!audioSource.isPlaying && !isFirst && !isRaceFinished)
+        {
+            isRaceFinished = true;
+        }
     }
 
     private void DrawRope()
