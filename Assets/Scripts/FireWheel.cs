@@ -22,7 +22,24 @@ public class FireWheel : MonoBehaviour
     public Transform startTransform;
     private List<Segment> segments = new List<Segment>();
     private bool isFirst = true;
-
+    
+    //Stamp
+    public Trigger FireWheelTrigger;
+    public Canvas FireWheelStampUI;
+    public Canvas FireWheelMissionUI;
+    public GameObject Backpack;
+    public GameObject FireWheeltstamp;
+    private bool isstampevent;
+    private bool isRevert;
+    private float fTickTime;
+    private float fTickTime2;
+    private bool isFirstEnd;
+    private int count;
+    public AudioClip[] UIClip;
+    public AudioSource UIAudioSource;
+    private bool isfirstsound = true;
+    private bool isNightTry = false;
+    private bool isOnesound = true;
     private void Reset()
     {
         TryGetComponent(out lineRenderer);
@@ -52,6 +69,26 @@ public class FireWheel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (FireWheelTrigger.isTrigger && count == 0) //first trigger, 게임 시작
+        {
+            // (+게임 설명 UI 활성화)
+            FireWheelMissionUI.gameObject.SetActive(true);
+            if (isfirstsound)
+            {
+                UIAudioSource.clip = UIClip[0];
+                UIAudioSource.Play();
+                isfirstsound = false;
+            }
+            fTickTime += Time.deltaTime;
+                
+            if (fTickTime >= 3.0f )
+            {
+                Debug.Log("미션 시작");
+                FireWheelMissionUI.gameObject.SetActive(false);
+                fTickTime = 0;
+                count += 1;
+            }
+        }
         UpdateSegments();
         for (int i = 0; i < segmentCount; i++)
         {
@@ -64,10 +101,49 @@ public class FireWheel : MonoBehaviour
             if (grabbable.BeingHeld)
             {
                 RenderSettings.skybox = night;
+                isNightTry = true;
             }
             else
             {
                 RenderSettings.skybox = day;
+                if (!isFirstEnd && isNightTry)
+                {
+                    isFirstEnd = true;
+                    StartCoroutine("StampEvent");
+                }
+                
+            }
+        }
+        
+        if (isstampevent)
+        {
+            fTickTime += Time.deltaTime;
+            if (fTickTime >= 4.0f)
+            {
+                FireWheelStampUI.gameObject.SetActive(true);
+                isRevert = true;
+                if (isOnesound)
+                {
+                    UIAudioSource.clip = UIClip[2];
+                    UIAudioSource.Play();
+                    isOnesound = false;
+                }
+
+            }
+            
+            if (isRevert) 
+            {
+                fTickTime2 += Time.deltaTime;
+                if (fTickTime2 >= 3.0f)
+                {
+                    //FireWheelStampUI.gameObject.SetActive(false);
+                    Backpack.SetActive(false);
+                    FireWheeltstamp.SetActive(false);
+
+                    isstampevent = false;
+                    fTickTime2 = 0;
+                }
+
             }
         }
     }
@@ -130,5 +206,18 @@ public class FireWheel : MonoBehaviour
             currentPos = pos;
             currentVel = Vector3.zero;
         }
+    }
+    
+    IEnumerator StampEvent() // stamp event
+    {
+        yield return new WaitForSeconds(2.0f);
+        
+        
+        Backpack.SetActive(true);
+        FireWheeltstamp.SetActive(true);
+        UIAudioSource.clip = UIClip[1];
+        UIAudioSource.Play();
+    
+        isstampevent = true;
     }
 }

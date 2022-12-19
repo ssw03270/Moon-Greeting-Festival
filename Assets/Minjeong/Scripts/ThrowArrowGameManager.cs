@@ -18,6 +18,7 @@ public class ThrowArrowGameManager : MonoBehaviour
     
     //Stamp
     public Canvas ArrowStampUI;
+    public Canvas ArrowMissionUI;
     public GameObject Backpack;
     public GameObject stamp;
     private bool isstampevent;
@@ -27,6 +28,12 @@ public class ThrowArrowGameManager : MonoBehaviour
     private float fTickTime;
     private float fTickTime2;
     private float fTickTime3;
+    public AudioClip[] UIClip;
+    public AudioSource UIAudioSource;
+    private bool isfirstsound = true;
+    private bool isOnesound = true;
+
+
 
     private bool firstend = false;
     private Animator _archeranim;
@@ -82,12 +89,19 @@ public class ThrowArrowGameManager : MonoBehaviour
             {
                 Debug.Log("게임 시작");
                 // (+게임 설명 UI 활성화)
-                
+                ArrowMissionUI.gameObject.SetActive(true);
+                if (isfirstsound)
+                {
+                    UIAudioSource.clip = UIClip[0];
+                    UIAudioSource.Play();
+                    isfirstsound = false;
+                }
                 fTickTime += Time.deltaTime;
                 
                 if (fTickTime >= 3.0f )
                 {
                     Debug.Log("미션 시작");
+                    ArrowMissionUI.gameObject.SetActive(false);
                     ScoreUI.gameObject.SetActive(true);
                     // 2초 뒤에 실행
                     _archeranim.SetTrigger("DoDraw");
@@ -330,7 +344,12 @@ public class ThrowArrowGameManager : MonoBehaviour
             {
                 ArrowStampUI.gameObject.SetActive(true);
                 isRevert = true;
-
+                if (isOnesound)
+                {
+                    UIAudioSource.clip = UIClip[2];
+                    UIAudioSource.Play();
+                    isOnesound = false;
+                }
             }
                 
             
@@ -340,7 +359,7 @@ public class ThrowArrowGameManager : MonoBehaviour
                 fTickTime3 += Time.deltaTime;
                 if (fTickTime3 >= 3.0f)
                 {
-                    ArrowStampUI.gameObject.SetActive(false);
+                    //ArrowStampUI.gameObject.SetActive(false);
                     Backpack.SetActive(false);
                     stamp.SetActive(false);
 
@@ -359,13 +378,15 @@ public class ThrowArrowGameManager : MonoBehaviour
         
         ScoreUI.gameObject.SetActive(false);
 
-
-        if (sum >= 140)
-        {
+        
             Backpack.SetActive(true);
             stamp.SetActive(true);
-        }
-        isstampevent = true;
+            UIAudioSource.clip = UIClip[1];
+            UIAudioSource.Play();
+            
+            isstampevent = true;
+        
+       
     }
     
     

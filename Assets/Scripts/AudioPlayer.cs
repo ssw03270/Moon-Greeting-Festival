@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,17 @@ public class AudioPlayer : MonoBehaviour
                 audioSource.time = 0;
                 audioSource.Play();
                 firstPlay = false;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" && transform.name != "background")
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
             }
         }
     }

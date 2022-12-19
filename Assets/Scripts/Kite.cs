@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Kite : MonoBehaviour
 {
+    public AudioSource background;
     public AudioClip audio;
     public Grabbable grabbable;
     public GameObject KiteObject;
@@ -69,6 +70,7 @@ public class Kite : MonoBehaviour
                     audioSource.Stop();
                     audioSource.time = 0;
                     audioSource.Play();
+                    background.Stop();
                 }
                 isFirst = false;    
             }

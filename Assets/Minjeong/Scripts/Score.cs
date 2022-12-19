@@ -84,8 +84,6 @@ public class Score : MonoBehaviour
         {
             _ScoreText = "0";   
         }
-
-        Debug.Log(_ScoreText + "score text");
     }
     
     
