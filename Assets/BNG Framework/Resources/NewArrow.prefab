@@ -4691,11 +4691,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -5332871817150742327, guid: 9682b63d059cb9e4a959c69b4d49233d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9682b63d059cb9e4a959c69b4d49233d,
         type: 3}
       propertyPath: m_Name
       value: Arrow Sketchfab
       objectReference: {fileID: 0}
+    - target: {fileID: 5529369964250292679, guid: 9682b63d059cb9e4a959c69b4d49233d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9682b63d059cb9e4a959c69b4d49233d, type: 3}
 --- !u!4 &4014925212071180073 stripped

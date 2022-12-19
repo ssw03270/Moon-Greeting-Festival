@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195cf8b0ef7176045848cdc9bfe63e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 0}
   audio: {fileID: 8300000, guid: e829d2ddea9ea7247aa12af977b1a66b, type: 3}
   grabbable: {fileID: 368141248}
   KiteObject: {fileID: 1519359769}
@@ -716,7 +717,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8c3ffb7a0db8540926aa63ca8414e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Fire: []
+  background: {fileID: 0}
   kite: {fileID: 370738281}
+  KiteTrigger: {fileID: 0}
+  KiteStampUI: {fileID: 0}
+  KiteMissionUI: {fileID: 0}
+  Backpack: {fileID: 0}
+  Kitetstamp: {fileID: 0}
+  UIClip: []
+  UIAudioSource: {fileID: 0}
 --- !u!65 &1308334151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -750,7 +760,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

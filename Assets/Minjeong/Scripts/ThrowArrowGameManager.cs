@@ -340,7 +340,7 @@ public class ThrowArrowGameManager : MonoBehaviour
         if (isstampevent)
         {
             fTickTime2 += Time.deltaTime;
-            if (fTickTime2 >= 4.0f)
+            if (fTickTime2 >= 6.0f)
             {
                 ArrowStampUI.gameObject.SetActive(true);
                 isRevert = true;
