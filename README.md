@@ -107,5 +107,5 @@ b. 자신이 원하는 건물에 들어가 각 건물에 비치된 전통 놀이
 [Oculus-url]: https://www.oculus.com/experiences/quest/
 [Visual Studio]: https://img.shields.io/badge/Visual%20Studio-5C2D91?style=for-the-badge&logo=Visual%20Studio&logoColor=white
 [VS-url]: https://visualstudio.microsoft.com/ko/
-[Github] : https://img.shields.io/badge/Github-5C2D91?style=for-the-badge&logo=Github&logoColor=white
-[Github-url] : https://github.com/ssw03270/Moon-Greeting-Festival
+[Github]: https://img.shields.io/badge/Github-5C2D91?style=for-the-badge&logo=Github&logoColor=white
+[Github-url]: https://github.com/ssw03270/Moon-Greeting-Festival
